@@ -10,10 +10,6 @@ from django.utils.translation import gettext as _
 # Create your models here.
 
 
-def calculate_ammount(invoice_amount, vat_ptc):
-    return int(invoice_amount) * float(vat_ptc)
-
-
 class Project(models.Model):
     """
     Describes a project that transactions, clients, or people relate to.
