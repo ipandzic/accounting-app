@@ -43,6 +43,7 @@ class Party(models.Model):
     def __str__(self):
         return self.name
 
+
 class Transaction(models.Model):
     """
     Represents any financial transaction between a company and some party.
