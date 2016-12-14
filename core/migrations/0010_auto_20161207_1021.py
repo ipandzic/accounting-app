@@ -22,6 +22,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='transaction',
             name='vat_ammount',
-            field=models.DecimalField(decimal_places=2, default=core.models.calculate_ammount, max_digits=8),
+            field=models.DecimalField(decimal_places=2, default='core.models.calculate_ammount', max_digits=8),
         ),
     ]

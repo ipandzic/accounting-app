@@ -30,7 +30,7 @@ class Party(models.Model):
     is_domestic = models.BooleanField(default=True)
     vat_ptc = models.IntegerField(
         default=25, validators=[MaxValueValidator(50), MinValueValidator(0)])
-    projects = models.ManyToManyField(Project)
+    projects = models.ManyToManyField(Project, blank=True)
     is_active = models.BooleanField(default=False)
 
     class Meta:
