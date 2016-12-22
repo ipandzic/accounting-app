@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='transaction',
             name='end_date',
-            field=models.DateField(default=core.models.Transaction.last_day_of_month, verbose_name='End date'),
+            field=models.DateField(default='core.models.Transaction.last_day_of_month', verbose_name='End date'),
         ),
         migrations.AlterField(
             model_name='transaction',
@@ -33,6 +33,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='transaction',
             name='start_date',
-            field=models.DateField(default=core.models.Transaction.first_day_of_month, verbose_name='Start date'),
+            field=models.DateField(default='core.models.Transaction.first_day_of_month', verbose_name='Start date'),
         ),
     ]

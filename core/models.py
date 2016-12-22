@@ -56,26 +56,23 @@ class Transaction(models.Model):
         ('5', 'adjustment')
         )
 
-    def first_day_of_month():
+    def calculate_first_day_of_month():
         """Returns the first day of a given month."""
         date = datetime.now()
-        year, month = date.year, date.month
-        return str(year) + '-' + str(month) + '-01'
+        return date.replace(day=1)
 
-    def last_day_of_month():
+    def calculate_last_day_of_month():
         """Returns the last day of a given month."""
         date = datetime.now()
-        year, month = date.year, date.month
-        monthrange = calendar.monthrange(year, month)
-        return str(year) + '-' + str(month) + '-' + str(monthrange[1])
+        return date.replace(day=calendar.monthrange(date.year, date.month)[1])
 
     party = models.ForeignKey(Party, on_delete=models.CASCADE)
     direction = models.CharField(max_length=1, default=1, choices=DIRECTION_CHOICES)
     transaction_type = models.CharField(max_length=1, default=1, choices=TYPE_CHOICES)
     projects = models.ManyToManyField(Project, blank=True)
-    start_date = models.DateField(_("Start date"), default=first_day_of_month)
-    end_date = models.DateField(_("End date"), default=last_day_of_month)
-    invoice_date = models.DateField(_("Invoice date"), default=datetime.now)
+    start_date = models.DateField(_("Start date"), default=calculate_first_day_of_month)
+    end_date = models.DateField(_("End date"), default=calculate_last_day_of_month)
+    invoice_date = models.DateField(_("Invoice date"), default=datetime.today)
     invoice_amount = models.DecimalField(max_digits=8, decimal_places=2, default=0.00, null=True)
     vat_ammount = models.DecimalField(max_digits=8, decimal_places=2, default=0.00, null=True)
     settlement_date = models.DateField(null=True, blank=True, default=None)
