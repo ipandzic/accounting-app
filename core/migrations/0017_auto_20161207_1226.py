@@ -14,10 +14,6 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RemoveField(
             model_name='transaction',
-            name='invoice_amount_currency',
-        ),
-        migrations.RemoveField(
-            model_name='transaction',
             name='settlement_ammount_currency',
         ),
         migrations.RemoveField(
