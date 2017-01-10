@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block head_title %}
+{{ instance.name }} | {{ block.super }}
+{% endblock head_title %}
+
+{% block content %}
+
+<h1>{{ title }}</h1>
+
+Project name: {{ instance.name }}<br/>
+Is internal: {{ instance.is_internal }}<br/>
+Is active: {{ instance.is_active }}<br/>
+Id: {{ instance.id }}</body><br/>
+
+<a href='{{ instance.get_absolute_url }}edit'>
+EDIT</a><br/>
+<a href='{{ instance.get_absolute_url }}delete'>
+DELETE</a><br/>
+<a href='/core'>HOME</a><br/>
+
+{% endblock content %}

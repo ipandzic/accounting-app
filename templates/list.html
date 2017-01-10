@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Homepage: {{ title }}</h1>
+
+<h3>List of projects (Click on project for more details):</h3>
+{% for project in project_list %}
+<p>
+
+<a href='{{ project.get_absolute_url }}'>
+{{ project.name }}</a><br/>
+Active project: {{ project.is_active }}<br/>
+Project id: {{ project.id }}<br/>
+</p>
+{% endfor %}
+
+<h3>List of parties (Click on party for more details):</h3>
+{% for party in party_list %}
+<p>
+
+<a href='{{ party.get_absolute_url }}'>
+{{ party.name }}</a><br/>
+Active: {{ party.is_active }}<br/>
+Id: {{ party.id }}<br/>
+</p>
+{% endfor %}
+
+<h3>List of transactions (Click on transaction for more details):</h3>
+{% for transaction in transaction_list %}
+<p>
+
+<a href='{{ transaction.get_absolute_url }}'>
+{{ transaction.party }} - {{ transaction.comments }}</a><br/>
+
+Party: {{ transaction.party }}<br/>
+Invoice_date: {{ transaction.invoice_date }}<br/>
+Id: {{ transaction.id }}<br/>
+</p>
+{% endfor %}
+
+{% endblock content %}
