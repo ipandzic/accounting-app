@@ -3,39 +3,82 @@
 
 <h1>Homepage: {{ title }}</h1>
 
-<h3>List of projects (Click on project for more details):</h3>
+<h3>List of projects:</h3>
+<a href='http://127.0.0.1:8000/core/projects/create/' class="btn btn-primary btn-space" role="button">
++ ADD PROJECT</a><br/>
+
+<div class="row">
 {% for project in project_list %}
-<p>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <div class="caption">
+        <h3><a href='{{ project.get_absolute_url }}'>
+        {{ project.name }}</a></h3>
+            <p>Active project: {{ project.is_active }}<br/>
+                Project id: {{ project.id }}<br/><br/>
+            </p>
+        <p><a href='{{ project.get_absolute_url }}' class="btn btn-primary" role="button">VIEW</a></p>
+      </div>
+    </div>
+  </div>
 
-<a href='{{ project.get_absolute_url }}'>
-{{ project.name }}</a><br/>
-Active project: {{ project.is_active }}<br/>
-Project id: {{ project.id }}<br/>
-</p>
+{% cycle "" "</div><div class='row'>" %}
 {% endfor %}
+</div>
 
-<h3>List of parties (Click on party for more details):</h3>
+
+<h3>List of parties:</h3>
+<a href='http://127.0.0.1:8000/core/parties/create/' class="btn btn-primary btn-space" role="button">
++ ADD PARTY</a><br/>
+<div class="row">
 {% for party in party_list %}
-<p>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <div class="caption">
+        <h3><a href='{{ party.get_absolute_url }}'>
+        {{ party.name }}</a></h3>
+            <p>Active: {{ party.is_active }}<br/>
+                Id: {{ party.id }}<br/>
+            </p>
+        <p><a href='{{ party.get_absolute_url }}' class="btn btn-primary" role="button">VIEW</a></p>
+      </div>
+    </div>
+  </div>
 
-<a href='{{ party.get_absolute_url }}'>
-{{ party.name }}</a><br/>
-Active: {{ party.is_active }}<br/>
-Id: {{ party.id }}<br/>
-</p>
+
+
+
+
+{% cycle "" "</div><div class='row'>" %}
 {% endfor %}
 
-<h3>List of transactions (Click on transaction for more details):</h3>
+
+
+</div>
+
+
+<h3>List of transactions:</h3>
+<a href='http://127.0.0.1:8000/core/transactions/create/' class="btn btn-primary btn-space" role="button">
++ ADD TRANSACTION</a><br/>
+<div class="row">
 {% for transaction in transaction_list %}
-<p>
 
-<a href='{{ transaction.get_absolute_url }}'>
-{{ transaction.party }} - {{ transaction.comments }}</a><br/>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <div class="caption">
+        <h3><a href='{{ transaction.get_absolute_url }}'>
+        {{ transaction.party }} - {{ transaction.comments }}</a></h3>
+            <p>Invoice_date: {{ transaction.invoice_date }}<br/>
+                Id: {{ transaction.id }}<br/></p>
+        <p><a href='{{ transaction.get_absolute_url }}' class="btn btn-primary btn-space" role="button">VIEW</a></p>
+      </div>
+    </div>
+  </div>
 
-Party: {{ transaction.party }}<br/>
-Invoice_date: {{ transaction.invoice_date }}<br/>
-Id: {{ transaction.id }}<br/>
-</p>
+{% cycle "" "</div><div class='row'>" %}
 {% endfor %}
+</div>
+
+
 
 {% endblock content %}

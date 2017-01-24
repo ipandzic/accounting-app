@@ -24,10 +24,10 @@ Description: {{ instance.description }}<br/>
 Comments: {{ instance.comments }}<br/>
 Id: {{ instance.id }}<br/>
 
-<a href='{{ instance.get_absolute_url }}edit'>
+<a href='{{ instance.get_absolute_url }}edit' class='btn btn-primary btn-space'>
 EDIT</a><br/>
-<a href='{{ instance.get_absolute_url }}delete'>
+<a href='{{ instance.get_absolute_url }}delete' class='btn btn-primary btn-space'>
 DELETE</a><br/>
-<a href='/core'>HOME</a><br/>
+<a href='/core' class='btn btn-primary btn-space'>HOME</a><br/>
 
 {% endblock content %}

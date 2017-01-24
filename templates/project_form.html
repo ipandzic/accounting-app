@@ -6,7 +6,8 @@
 
 <form method="POST" action="">{% csrf_token %}
 {{ form.as_p }}
-<input type="submit" value="Add Project" />
+<input type="submit" class='btn btn-primary' value="ADD PROJECT" />
+<a href='/core' class='btn btn-primary btn-space'>BACK</a><br/>
 </form>
 
 {% endblock content %}

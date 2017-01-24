@@ -2,6 +2,8 @@ from decimal import Decimal
 
 from .env import *
 
+import os
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '=m8b%1)zyvyx_2(t&a9d4dy_loytem(*e&j@dodh-8+ht-qaqn'
 
@@ -92,18 +94,12 @@ USE_L10N = ENV_BOOL('USE_L10N', True)
 USE_TZ = ENV_BOOL('USE_TZ', True)
 
 
-STATIC_URL = ENV_STR('STATIC_URL', '/static/')
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    ABS_PATH("static"),
+    os.path.join(BASE_DIR, "static"),
+    #'var/www/static/',
 ]
 
-# http://ec.europa.eu/taxation_customs/resources/documents/taxation/vat/how_vat_works/rates/vat_rates_en.pdf
-'''
-VAT_DATA = {
-    'HR': Decimal(0.25),
-    'SE': Decimal(0.22)
-}
-EXEMPTED_COUNTRIES = ['HR']
-PAYMENT_POSTPONE_RATE = 14 # days
-'''
+STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media_cdn")
