@@ -1,9 +1,8 @@
 from django.contrib import messages
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 
 from .forms import ProjectForm, PartyForm, TransactionForm
-from .models import Project, Party, Transaction
+from .models import Party, Project, Transaction
 # Create your views here.
 
 
