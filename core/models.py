@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 import calendar
 
+from django.core.urlresolvers import reverse
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.timezone import datetime
@@ -21,6 +22,9 @@ class Project(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse("project_detail", kwargs={"id": self.id})
+
 
 class Party(models.Model):
     """
@@ -38,6 +42,9 @@ class Party(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse("party_detail", kwargs={"id": self.id})
 
 
 class Transaction(models.Model):
@@ -83,3 +90,6 @@ class Transaction(models.Model):
 
     def __str__(self):
         return str(self.party) + ' - ' + self.description
+
+    def get_absolute_url(self):
+        return reverse("transaction_detail", kwargs={"id": self.id})

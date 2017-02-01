@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block head_title %}
+{{ instance.party }} {{ instance.comment }} | {{ block.super }}
+{% endblock head_title %}
+
+{% block content %}
+
+<h1>{{ title }}</h1>
+
+Party: {{ instance.party }}<br/>
+Direction: {{ instance.direction }}<br/>
+Transaction_type: {{ instance.transaction_type }}<br/>
+Projects: {{ instance.projects }}<br/>
+Start_date: {{ instance.start_date }}<br/>
+End_date: {{ instance.end_date }}<br/>
+Invoice_date: {{ instance.invoice_date }}<br/>
+Invoice_amount: {{ instance.invoice_amount }}<br/>
+Vat_ammount: {{ instance.vat_ammount }}<br/>
+Settlement_date: {{ instance.settlement_date }}<br/>
+Settlement_ammount: {{ instance.settlement_ammount }}<br/>
+Adjustment: {{ instance.adjustment }}<br/>
+Description: {{ instance.description }}<br/>
+Comments: {{ instance.comments }}<br/>
+Id: {{ instance.id }}<br/>
+
+<a href='{{ instance.get_absolute_url }}edit' class='btn btn-primary btn-space'>
+EDIT</a><br/>
+<a href='{{ instance.get_absolute_url }}delete' class='btn btn-primary btn-space'>
+DELETE</a><br/>
+<a href='/core' class='btn btn-primary btn-space'>HOME</a><br/>
+
+{% endblock content %}
