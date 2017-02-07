@@ -1,8 +1,8 @@
 from django.contrib import admin
 
+from .models import Party, Project, Transaction
 # Register your models here.
-from .models import Project, Party, Transaction
 
-admin.site.register(Project)
 admin.site.register(Party)
+admin.site.register(Project)
 admin.site.register(Transaction)
