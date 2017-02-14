@@ -15,10 +15,10 @@
                             <a href="{% url 'core:transaction_detail' transaction.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
 
                             <!-- Update transaction -->
-                            <form action="{% url 'core:transaction_update' pk=transaction.id %}" style="display: inline;">
+                            <form action="{% url 'core:transaction_update' transaction.id %}" style="display: inline;">
                                 {% csrf_token %}
                                 <input type="hidden" name="transaction_id" value="{{ transaction.id }}" />
-                                <button type="submit" value="update" class="btn btn-default btn-sm">
+                                <button type="submit" class="btn btn-default btn-sm">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </button>
                             </form>
