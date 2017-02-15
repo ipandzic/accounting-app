@@ -23,12 +23,13 @@ class Project(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("project_detail", kwargs={"id": self.id})
+        return reverse("core:project_detail", kwargs={"pk": self.pk})
 
 
 class Party(models.Model):
     """
-    Represents an entity which paid the company, or which was paid by the company.
+    Represents an entity which paid the company,
+    or which was paid by the company.
     """
     name = models.CharField(max_length=1024)
     is_domestic = models.BooleanField(default=True)
@@ -44,7 +45,7 @@ class Party(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("party_detail", kwargs={"id": self.id})
+        return reverse("core:party_detail", kwargs={"pk": self.pk})
 
 
 class Transaction(models.Model):
@@ -92,4 +93,4 @@ class Transaction(models.Model):
         return str(self.party) + ' - ' + self.description
 
     def get_absolute_url(self):
-        return reverse("transaction_detail", kwargs={"id": self.id})
+        return reverse("core:transaction_detail", kwargs={"pk": self.pk})

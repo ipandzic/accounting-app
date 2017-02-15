@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Party details{% endblock %}
+
+{% block body %}
+<h1> {{ party.name }} </h1>
+<br/>
+Id: {{ party.id }}<br/>
+Domestic: {{ party.is_domestic }}<br/>
+Vat ptc: {{ party.vat_ptc }}<br/>
+Active: {{ party.is_active }}<br/>
+
+<h3>List of projects:</h3>
+
+{% for project in party.projects.all %}
+        <li>{{ project }}</li>
+{% endfor %}
+{% endblock %}

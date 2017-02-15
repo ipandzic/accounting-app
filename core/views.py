@@ -1,123 +1,91 @@
-from django.contrib import messages
-from django.shortcuts import render, get_object_or_404, redirect
-
-from .forms import ProjectForm, PartyForm, TransactionForm
+from django.views import generic
+from django.core.urlresolvers import reverse_lazy
 from .models import Party, Project, Transaction
-# Create your views here.
+from .forms import PartyForm, ProjectForm, TransactionForm
 
 
-def core_list(request):
-    queryset_project = Project.objects.all()
-    queryset_party = Party.objects.all()
-    queryset_transaction = Transaction.objects.all()
-    context = {
-        "project_list": queryset_project,
-        "party_list": queryset_party,
-        "transaction_list": queryset_transaction,
-        "title": "List"
-    }
-    return render(request, "list.html", context)
+class Home(generic.ListView):
+    template_name = 'core/list.html'
+    context_object_name = 'all_transactions'
+
+    def get_queryset(self):
+        return Transaction.objects.all()
 
 
-def parties_create_or_update(request, id=None):
-    if id is not None:
-        instance = get_object_or_404(Party, id=id)
-        form = PartyForm(request.POST or None, instance=instance)
-    else:
-        form = PartyForm(request.POST)
-    if form.is_valid():
-        instance = form.save(commit=False)
-        instance.save()
-        messages.success(request, "Item Saved")
-        return redirect("core_list")
-    context = {"form": form}
-    if id is not None:
-        context["title"] = instance.name
-        context["instance"] = instance
-    return render(request, "party_form.html", context)
+class PartyList(generic.ListView):
+    template_name = 'core/party_list.html'
+    context_object_name = 'all_parties'
+
+    def get_queryset(self):
+        return Party.objects.all()
 
 
-def projects_create_or_update(request, id=None):
-    if id is not None:
-        instance = get_object_or_404(Project, id=id)
-        form = ProjectForm(request.POST or None, instance=instance)
-    else:
-        form = ProjectForm(request.POST)
-    if form.is_valid():
-        instance = form.save(commit=False)
-        instance.save()
-        messages.success(request, "Successfully Created")
-        return redirect("core_list")
-    context = {"form": form}
-    if id is not None:
-        context["title"] = instance.name
-        context["instance"] = instance
-    return render(request, "project_form.html", context)
+class ProjectList(generic.ListView):
+    template_name = 'core/project_list.html'
+    context_object_name = 'all_projects'
+
+    def get_queryset(self):
+        return Project.objects.all()
 
 
-def transactions_create_or_update(request, id=None):
-    if id is not None:
-        instance = get_object_or_404(Transaction, id=id)
-        form = TransactionForm(request.POST or None, instance=instance)
-    else:
-        form = TransactionForm(request.POST)
-    if form.is_valid():
-        instance = form.save(commit=False)
-        instance.save()
-        messages.success(request, "Successfully Created")
-        return redirect("core_list")
-    context = {"form": form}
-    if id is not None:
-        context["title"] = instance.comments
-        context["instance"] = instance
-    return render(request, "transaction_form.html", context)
+class PartyDetailView(generic.DetailView):
+    model = Party
+    template_name = 'core/party_detail.html'
+    form_class = PartyForm
 
 
-def parties_detail(request, id):
-    instance = get_object_or_404(Party, id=id)
-    context = {
-        "title": instance.name,
-        "id": instance.id,
-        "instance": instance,
-    }
-    return render(request, "party_detail.html", context)
+class ProjectDetailView(generic.DetailView):
+    model = Project
+    template_name = 'core/project_detail.html'
+    form_class = ProjectForm
 
 
-def projects_detail(request, id):
-    instance = get_object_or_404(Project, id=id)
-    context = {
-        "title": instance.name,
-        "id": instance.id,
-        "instance": instance,
-    }
-    return render(request, "project_detail.html", context)
+class TransactionDetailView(generic.DetailView):
+    model = Transaction
+    template_name = 'core/transaction_detail.html'
+    form_class = TransactionForm
 
 
-def transactions_detail(request, id):
-    instance = get_object_or_404(Transaction, id=id)
-    context = {
-        "title": str(instance.party) + " - " + str(instance.comments),
-        "instance": instance,
-    }
-    return render(request, "transaction_detail.html", context)
+class PartyCreate(generic.CreateView):
+    model = Party
+    form_class = PartyForm
 
 
-def parties_delete(request, id=None):
-    instance = get_object_or_404(Party, id=id)
-    instance.delete()
-    messages.success(request, "Successfully Deleted")
-    return redirect("core_list")
+class ProjectCreate(generic.CreateView):
+    model = Project
+    form_class = ProjectForm
 
 
-def projects_delete(request, id=None):
-    instance = get_object_or_404(Project, id=id)
-    instance.delete()
-    messages.success(request, "Successfully Deleted")
-    return redirect("core_list")
+class TransactionCreate(generic.CreateView):
+    model = Transaction
+    form_class = TransactionForm
 
 
-def transactions_delete(request, id=None):
-    instance = get_object_or_404(Transaction, id=id)
-    instance.delete()
-    messages.success(request, "Successfully Deleted")
-    return redirect("core_list")
+class PartyUpdate(generic.UpdateView):
+    model = Party
+    form_class = PartyForm
+
+
+class ProjectUpdate(generic.UpdateView):
+    model = Project
+    form_class = ProjectForm
+
+
+class TransactionUpdate(generic.UpdateView):
+    model = Transaction
+    form_class = TransactionForm
+
+
+class PartyDelete(generic.DeleteView):
+    model = Party
+    success_url = reverse_lazy("core:party_list")
+
+
+class ProjectDelete(generic.DeleteView):
+    model = Project
+    success_url = reverse_lazy("core:project_list")
+
+
+class TransactionDelete(generic.DeleteView):
+    model = Transaction
+    success_url = reverse_lazy("core:home")
