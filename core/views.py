@@ -1,10 +1,7 @@
 from django.views import generic
 from django.core.urlresolvers import reverse_lazy
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from .models import Party, Project, Transaction
 from .forms import PartyForm, ProjectForm, TransactionForm
-from API.serializers import PartySerializer, ProjectSerializer, TransactionSerializer
 
 
 class Home(generic.ListView):
@@ -92,24 +89,3 @@ class ProjectDelete(generic.DeleteView):
 class TransactionDelete(generic.DeleteView):
     model = Transaction
     success_url = reverse_lazy("core:home")
-
-
-class PartyListAPI(APIView):
-    def get(self, request):
-        parties = Party.objects.all()
-        serializer = PartySerializer(parties, many=True)
-        return Response(serializer.data)
-
-
-class ProjectListAPI(APIView):
-    def get(self, request):
-        projects = Project.objects.all()
-        serializer = ProjectSerializer(projects, many=True)
-        return Response(serializer.data)
-
-
-class TransactionListAPI(APIView):
-    def get(self, request):
-        transactions = Transaction.objects.all()
-        serializer = TransactionSerializer(transactions, many=True)
-        return Response(serializer.data)

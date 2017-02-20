@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from core import views
+from . import views
 
 app_name = 'API'
 
