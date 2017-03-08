@@ -2,7 +2,6 @@ from __future__ import unicode_literals
 
 import calendar
 
-from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
@@ -16,7 +15,6 @@ class Project(models.Model):
     """
     Describes a project that transactions, clients, or people relate to.
     """
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
     name = models.CharField(max_length=1024)
     is_internal = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
@@ -33,7 +31,6 @@ class Party(models.Model):
     Represents an entity which paid the company,
     or which was paid by the company.
     """
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
     name = models.CharField(max_length=1024)
     is_domestic = models.BooleanField(default=True)
     vat_ptc = models.IntegerField(
@@ -55,7 +52,6 @@ class Transaction(models.Model):
     """
     Represents any financial transaction between a company and some party.
     """
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
     DIRECTION_CHOICES = (
         ('1', 'incoming'),
         ('2', 'outgoing')
