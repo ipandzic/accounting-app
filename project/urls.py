@@ -13,19 +13,17 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf import settings
-from django.conf.urls import include, url
-from django.conf.urls.static import static
+from django.conf.urls import url, include
 from django.contrib import admin
-from rest_framework.urlpatterns import format_suffix_patterns
+from rest_framework import routers
+from core.views import job_list, JobsViewSet
+
+# Routers provide an easy way of automatically determining the URL conf.
+router = routers.DefaultRouter()
+router.register(r'jobs', JobsViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^core/', include("core.urls")),
-    url(r'^api/', include("API.urls")),
+    url(r'^$', job_list),
+    url(r'^api/', include(router.urls)),
 ]
-
-urlpatterns = format_suffix_patterns(urlpatterns)
-
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

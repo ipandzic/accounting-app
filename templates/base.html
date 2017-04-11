@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.css' %}"> -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="{% static 'css/jobboard.css' %}">
+    <title>Django Accounting</title>
+</head>
+<body id="app">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header text-center">
+                <div class="navtitle">
+                    <img class="navimage" src="{% static 'media/vue.png' %}">
+                    <span class="navbar-brand" href="/">[[ apptitle ]]</span>
+                    <img class="navimage" src="{% static 'media/djangofavicon.png' %}">
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    {% block parties %}
+
+    {% endblock %}
+
+    <script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- Vue.JS -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.0/vue-resource.min.js"></script>
+    <script type="text/javascript" src="{% static 'vuejs/djangovue.js' %}"></script>
+</body>
+</html>
