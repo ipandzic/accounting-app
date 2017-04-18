@@ -15,6 +15,7 @@
 
           <input type="submit" value="Submit">
         </form>
+
         <ul>
           <li v-for="project in projects">
             {{project.name}}: <br />Internal: {{project.internal}}
