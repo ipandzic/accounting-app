@@ -1,19 +1,33 @@
     <template>
         <div class="parties">
-        <h1>Parties</h1>
+        <h3>Add Party</h3>
         <form v-on:submit="addParty">
           <input type="text" v-model="newParty.name" placeholder="Enter Name">
   
           <br />
+          Is the party party?<input type="checkbox" class=toggle v-model="newParty.is_domestic">
+
+          <br />
+          <input type="radio" id="one" value="true" v-model="newParty.is_active">
+          <label for="one">Yes</label>
+          <br />
+          <input type="radio" id="two" value="false" v-model="newParty.is_active">
+          <label for="two">No</label>   
+          <br />
 
           <input type="submit" value="Submit">
         </form>
-
+      
+      <hr>
+        <h1>Parties</h1>
         <ul>
           <li v-for="party in parties">
-            {{party.name}} <button v-on:click="deleteParty(party)">X</button>
+            Name: {{party.name}}  <br />
+            Domestic: {{party.is_domestic}} <br />
+            Active: {{party.is_active}}
+            <button v-on:click="deleteParty(parties)">X</button>
           </li>
-          </li>
+
         </ul>
 
         </div>
@@ -32,8 +46,8 @@
           addParty: function (e) {
             this.parties.push({
               name: this.newParty.name,
-              internal: this.newParty.internal,
-              active: this.newParty.active
+              is_domestic: this.newParty.is_domestic,
+              is_active: this.newParty.is_active
             })
             e.preventDefault()
           },

@@ -1,6 +1,7 @@
     <template>
         <div class="projects">
-        <h1>Projects</h1>
+        <h3>Add Project</h3>
+        
         <form v-on:submit="addProject">
           <input type="text" v-model="newProject.name" placeholder="Enter Name">
           <br />Is the project internal?<input type="checkbox" class=toggle v-model="newProject.internal">
@@ -14,8 +15,10 @@
           <br />
 
           <input type="submit" value="Submit">
-        </form>
 
+        </form>
+      <hr>
+        <h1>Projects</h1>
         <ul>
           <li v-for="project in projects">
             {{project.name}}: <br />Internal: {{project.internal}}

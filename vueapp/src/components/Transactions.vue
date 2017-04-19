@@ -1,6 +1,6 @@
     <template>
         <div class="transactions">
-        <h1>Transactions</h1>
+        <h2>Add Transaction</h2>
         <form v-on:submit="addTransaction">
           <input type="text" v-model="newTransaction.name" placeholder="Enter Name">
   
@@ -9,10 +9,11 @@
           <input type="submit" value="Submit">
         </form>
 
+      <hr>
+        <h1>Transactions</h1>
         <ul>
           <li v-for="transaction in transactions">
             {{transaction.name}} <button v-on:click="deleteTransaction(transactions)">X</button>
-          </li>
           </li>
         </ul>
 
