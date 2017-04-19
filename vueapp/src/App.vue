@@ -16,6 +16,8 @@
             <ul class="nav navbar-nav">
               <li class="active"><router-link to="/">Home</router-link></li>
               <li><router-link to="/projects">Projects</router-link></li>
+              <li><router-link to="/parties">Parties</router-link></li>
+              <li><router-link to="/transactions">Transactions</router-link></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->

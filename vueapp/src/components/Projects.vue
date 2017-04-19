@@ -49,11 +49,17 @@
           }
         },
         created: function () {
-          this.$http.get('http://127.0.0.1:8000/api/project/', {headers: { 'Authorization': 'Bearer' + 'fa9bcbabf7c716d5b91451bd3c3686657fddf11f', 'Access-Control-Allow-Origin': true }}).then(function (response) {
+          this.$http.get('http://127.0.0.1:8000/api/project/', {
+            headers:
+            {
+              'Authorization': 'Token ' + '03f718dda3c1484c26337db75181a23ff7841c6d'
+            }
+          }).then(function (response) {
             this.projects = response.data
           })
         }
       }
+
     </script>
 
     <style scoped>

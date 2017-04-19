@@ -5,13 +5,19 @@ import vueResource from 'vue-resource'
 import VueRouter from 'vue-router'
 import App from './App'
 import Projects from './components/Projects.vue'
+import Parties from './components/Parties.vue'
+import Transactions from './components/Transactions.vue'
 import Home from './components/Home.vue'
 
 Vue.use(vueResource)
 Vue.use(VueRouter)
 
+Vue.http.options.xhr = {withCredentials: true}
+
 const routes = [
   { path: '/projects', component: Projects },
+  { path: '/parties', component: Parties },
+  { path: '/transactions', component: Transactions },
   { path: '/', component: Home }
 ]
 
