@@ -5,7 +5,7 @@
           <input type="text" v-model="newParty.name" placeholder="Enter Name">
   
           <br />
-          Is the party party?<input type="checkbox" class=toggle v-model="newParty.is_domestic">
+          Is the party domestic?<input type="checkbox" class=toggle v-model="newParty.is_domestic">
 
           <br />
           <input type="radio" id="one" value="true" v-model="newParty.is_active">
@@ -44,11 +44,17 @@
         },
         methods: {
           addParty: function (e) {
-            this.parties.push({
-              name: this.newParty.name,
-              is_domestic: this.newParty.is_domestic,
-              is_active: this.newParty.is_active
-            })
+            this.$http.post('http://127.0.0.1:8000/api/party/',
+              {
+                name: this.newParty.name,
+                is_domestic: this.newParty.is_domestic,
+                is_active: this.newParty.is_active
+              }, {
+                headers: {
+                  'Authorization': 'Token ' + '03f718dda3c1484c26337db75181a23ff7841c6d'
+                }
+              }
+            )
             e.preventDefault()
           },
           deleteParty: function (party) {

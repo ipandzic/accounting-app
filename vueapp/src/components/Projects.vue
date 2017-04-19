@@ -7,10 +7,10 @@
           <br />Is the project internal?<input type="checkbox" class=toggle v-model="newProject.internal">
           <br />
 
-          <input type="radio" id="one" value="true" v-model="newProject.active">
+          <input type="radio" id="one" value="true" v-model="newProject.is_active">
           <label for="one">Yes</label>
           <br />
-          <input type="radio" id="two" value="false" v-model="newProject.active">
+          <input type="radio" id="two" value="false" v-model="newProject.is_active">
           <label for="two">No</label>   
           <br />
 
@@ -22,7 +22,7 @@
         <ul>
           <li v-for="project in projects">
             {{project.name}}: <br />Internal: {{project.internal}}
-            <br />Active: {{project.active}} <button v-on:click="deleteProject(project)">X</button>
+            <br />Active: {{project.is_active}} <button v-on:click="deleteProject(project)">X</button>
           </li>
         </ul>
 
@@ -40,15 +40,21 @@
         },
         methods: {
           addProject: function (e) {
-            this.projects.push({
-              name: this.newProject.name,
-              internal: this.newProject.internal,
-              active: this.newProject.active
-            })
+            this.$http.post('http://127.0.0.1:8000/api/project/',
+              {
+                'name': this.newProject.name,
+                'internal': this.newProject.internal,
+                'is_active': this.newProject.is_active
+              }, {
+                headers: {
+                  'Authorization': 'Token ' + '03f718dda3c1484c26337db75181a23ff7841c6d'
+                }
+              }
+              )
             e.preventDefault()
           },
           deleteProject: function (project) {
-            this.projects.splice(this.projects.indexOf(project), 1)
+            this.$http.delete('http://127.0.0.1:8000/api/project/', project)
           }
         },
         created: function () {
@@ -64,6 +70,7 @@
       }
 
     </script>
+
 
     <style scoped>
         
