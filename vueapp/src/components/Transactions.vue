@@ -30,11 +30,20 @@
           }
         },
         methods: {
-          addTransaction: function (e) {
+          addTransaction: function (transaction) {
             this.transactions.push({
               name: this.newTransaction.name
             })
-            e.preventDefault()
+            this.$http.post('http://127.0.0.1:8000/api/transaction/',
+              {
+                'name': this.newTransaction.name
+              }, {
+                headers: {
+                  'Authorization': 'Token ' + '5e5b8ec4a2adadf779061069b59a4ed0d6df2417'
+                }
+              }
+              )
+            transaction.preventDefault()
           },
           deleteTransaction: function (transaction) {
             this.transactions.splice(this.transactions.indexOf(transaction), 1)
@@ -44,7 +53,7 @@
           this.$http.get('http://127.0.0.1:8000/api/transaction/', {
             headers:
             {
-              'Authorization': 'Token ' + '03f718dda3c1484c26337db75181a23ff7841c6d'
+              'Authorization': 'Token ' + '5e5b8ec4a2adadf779061069b59a4ed0d6df2417'
             }
           }).then(function (response) {
             this.transactions = response.data

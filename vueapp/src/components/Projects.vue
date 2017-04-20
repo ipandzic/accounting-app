@@ -39,7 +39,12 @@
           }
         },
         methods: {
-          addProject: function (e) {
+          addProject: function (project) {
+            this.projects.push({
+              name: this.newProject.name,
+              internal: this.newProject.internal,
+              active: this.newProject.active
+            })
             this.$http.post('http://127.0.0.1:8000/api/project/',
               {
                 'name': this.newProject.name,
@@ -47,21 +52,27 @@
                 'is_active': this.newProject.is_active
               }, {
                 headers: {
-                  'Authorization': 'Token ' + '03f718dda3c1484c26337db75181a23ff7841c6d'
+                  'Authorization': 'Token ' + '5e5b8ec4a2adadf779061069b59a4ed0d6df2417'
                 }
               }
               )
-            e.preventDefault()
+            project.preventDefault()
           },
           deleteProject: function (project) {
-            this.$http.delete('http://127.0.0.1:8000/api/project/', project)
+            this.projects.splice(this.projects.indexOf(project), 1)
+            this.$http.delete('http://127.0.0.1:8000/api/project/' + project.id, {
+              headers:
+              {
+                'Authorization': 'Token ' + '5e5b8ec4a2adadf779061069b59a4ed0d6df2417'
+              }
+            })
           }
         },
         created: function () {
           this.$http.get('http://127.0.0.1:8000/api/project/', {
             headers:
             {
-              'Authorization': 'Token ' + '03f718dda3c1484c26337db75181a23ff7841c6d'
+              'Authorization': 'Token ' + '5e5b8ec4a2adadf779061069b59a4ed0d6df2417'
             }
           }).then(function (response) {
             this.projects = response.data
@@ -71,7 +82,5 @@
 
     </script>
 
-
     <style scoped>
-        
     </style>

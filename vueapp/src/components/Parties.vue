@@ -24,6 +24,7 @@
           <li v-for="party in parties">
             Name: {{party.name}}  <br />
             Domestic: {{party.is_domestic}} <br />
+            VAT: {{party.vat_ptc}} <br />
             Active: {{party.is_active}}
             <button v-on:click="deleteParty(parties)">X</button>
           </li>
@@ -43,7 +44,12 @@
           }
         },
         methods: {
-          addParty: function (e) {
+          addParty: function (party) {
+            this.parties.push({
+              name: this.newParty.name,
+              is_domestic: this.newParty.is_domestic,
+              is_active: this.newParty.is_active
+            })
             this.$http.post('http://127.0.0.1:8000/api/party/',
               {
                 name: this.newParty.name,
@@ -51,21 +57,27 @@
                 is_active: this.newParty.is_active
               }, {
                 headers: {
-                  'Authorization': 'Token ' + '03f718dda3c1484c26337db75181a23ff7841c6d'
+                  'Authorization': 'Token ' + '5e5b8ec4a2adadf779061069b59a4ed0d6df2417'
                 }
               }
             )
-            e.preventDefault()
+            party.preventDefault()
           },
           deleteParty: function (party) {
             this.parties.splice(this.parties.indexOf(party), 1)
+            this.$http.delete('http://127.0.0.1:8000/api/party/' + party.id, {
+              headers:
+              {
+                'Authorization': 'Token ' + '5e5b8ec4a2adadf779061069b59a4ed0d6df2417'
+              }
+            })
           }
         },
         created: function () {
           this.$http.get('http://127.0.0.1:8000/api/party/', {
             headers:
             {
-              'Authorization': 'Token ' + '03f718dda3c1484c26337db75181a23ff7841c6d'
+              'Authorization': 'Token ' + '5e5b8ec4a2adadf779061069b59a4ed0d6df2417'
             }
           }).then(function (response) {
             this.parties = response.data
@@ -76,5 +88,4 @@
     </script>
 
     <style scoped>
-        
     </style>
