@@ -8,12 +8,15 @@
           Is the party domestic?<input type="checkbox" class=toggle v-model="newParty.is_domestic">
 
           <br />
+          <input type="text" v-model="newParty.vat_ptc" placeholder="Enter VAT">
+          <br />
           <input type="radio" id="one" value="true" v-model="newParty.is_active">
           <label for="one">Yes</label>
           <br />
           <input type="radio" id="two" value="false" v-model="newParty.is_active">
           <label for="two">No</label>   
           <br />
+          <input type="text" v-model="newParty.projects" placeholder="Enter projects">
 
           <input type="submit" value="Submit">
         </form>
@@ -54,7 +57,9 @@
               {
                 name: this.newParty.name,
                 is_domestic: this.newParty.is_domestic,
-                is_active: this.newParty.is_active
+                vat_ptc: this.newParty.vat_ptc,
+                is_active: this.newParty.is_active,
+                projects: this.newParty.projects
               }, {
                 headers: {
                   'Authorization': 'Token ' + '5e5b8ec4a2adadf779061069b59a4ed0d6df2417'
