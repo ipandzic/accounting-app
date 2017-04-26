@@ -1,5 +1,6 @@
     <template>
         <div class="parties">
+
         <h3>Add Party</h3>
         <form v-on:submit="addParty">
           <input type="text" v-model="newParty.name" placeholder="Enter Name">
@@ -17,12 +18,12 @@
           <label for="two">No</label>   
           <br />
           <input type="text" v-model="newParty.projects" placeholder="Enter projects">
-
+          <br />
           <input type="submit" value="Submit">
         </form>
       
       <hr>
-        <h1>Parties</h1>
+        <h1>Parties:</h1>
         <ul>
           <li v-for="party in parties">
             Name: {{party.name}}  <br />
@@ -62,10 +63,18 @@
                 projects: this.newParty.projects
               }, {
                 headers: {
-                  'Authorization': 'Token ' + '5e5b8ec4a2adadf779061069b59a4ed0d6df2417'
+                  'Authorization': 'Token ' + '816ade3644a5f8ce210adbca8bd701fddb82f729'
                 }
               }
             )
+            this.$http.get('http://127.0.0.1:8000/api/party/', {
+              headers:
+              {
+                'Authorization': 'Token ' + '816ade3644a5f8ce210adbca8bd701fddb82f729'
+              }
+            }).then(function (response) {
+              this.parties = response.data
+            })
             party.preventDefault()
           },
           deleteParty: function (party) {
@@ -73,7 +82,7 @@
             this.$http.delete('http://127.0.0.1:8000/api/party/' + party.id, {
               headers:
               {
-                'Authorization': 'Token ' + '5e5b8ec4a2adadf779061069b59a4ed0d6df2417'
+                'Authorization': 'Token ' + '816ade3644a5f8ce210adbca8bd701fddb82f729'
               }
             })
           }
@@ -82,7 +91,7 @@
           this.$http.get('http://127.0.0.1:8000/api/party/', {
             headers:
             {
-              'Authorization': 'Token ' + '5e5b8ec4a2adadf779061069b59a4ed0d6df2417'
+              'Authorization': 'Token ' + '816ade3644a5f8ce210adbca8bd701fddb82f729'
             }
           }).then(function (response) {
             this.parties = response.data

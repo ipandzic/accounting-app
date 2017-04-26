@@ -5,6 +5,8 @@
         <form v-on:submit="addTransaction">
           <input type="text" v-model="newTransaction.comments" placeholder="Enter Comment">
           <br />
+          <input type="text" v-model="newTransaction.party" placeholder="Enter Party Name">
+          <br />
 
           <input type="submit" value="Submit">
 
@@ -13,7 +15,7 @@
         <h1>Transactions</h1>
         <ul>
           <li v-for="transaction in transactions">
-            {{transaction.comments}}: {{transaction.direction}}: 
+            {{transaction.comments}}:
             <button v-on:click="deleteTransaction(transaction)">X</button>
           </li>
         </ul>
@@ -33,14 +35,16 @@
         methods: {
           addTransaction: function (transaction) {
             this.transactions.push({
-              comments: this.newTransaction.comments
+              comments: this.newTransaction.comments,
+              party: this.newTransaction.party
             })
             this.$http.post('http://127.0.0.1:8000/api/transaction/',
               {
-                'comments': this.newTransaction.comments
+                'comments': this.newTransaction.comments,
+                'party': this.newTransaction.party
               }, {
                 headers: {
-                  'Authorization': 'Token ' + '5e5b8ec4a2adadf779061069b59a4ed0d6df2417'
+                  'Authorization': 'Token ' + '816ade3644a5f8ce210adbca8bd701fddb82f729'
                 }
               }
               )
@@ -51,7 +55,7 @@
             this.$http.delete('http://127.0.0.1:8000/api/transaction/' + transaction.id, {
               headers:
               {
-                'Authorization': 'Token ' + '5e5b8ec4a2adadf779061069b59a4ed0d6df2417'
+                'Authorization': 'Token ' + '816ade3644a5f8ce210adbca8bd701fddb82f729'
               }
             })
           }
@@ -60,7 +64,7 @@
           this.$http.get('http://127.0.0.1:8000/api/transaction/', {
             headers:
             {
-              'Authorization': 'Token ' + '5e5b8ec4a2adadf779061069b59a4ed0d6df2417'
+              'Authorization': 'Token ' + '816ade3644a5f8ce210adbca8bd701fddb82f729'
             }
           }).then(function (response) {
             this.transactions = response.data
