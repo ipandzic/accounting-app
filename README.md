@@ -6,7 +6,7 @@ Simple accounting app developed for in-house use.
 
 Get the source from GitHub:
 
-    git clone https://github.com/dobarkod/accounting.git
+    git clone https://github.com/Pandza11/accounting-app.git
 
 Create Python3 virtual environment:
 
@@ -16,7 +16,7 @@ Install required files:
 
     pip install -r requirements.txt
 
-Create '/accounting/.env' file to define environment variables
+Create '/accounting-app/.env' file to define environment variables
 showed in .env.sample, for example:
 
     DEBUG=true
