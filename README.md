@@ -1,6 +1,6 @@
 # Accounting
 
-Simple accounting app developed for in-house use.
+Simple accounting app.
 
 ### Quickstart
 
